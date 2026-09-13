@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Small Spotlight — a corner for small businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFBF5;
+    --paper-dark:#FFEBF1;
+    --ink:#2E2A26;
+    --ink-soft:#726A60;
+    --sage:#7FE0C9;
+    --sage-deep:#2EC4B6;
+    --blush:#FFEBF1;
+    --coral:#FFB4C6;
+    --coral-deep:#FF6F91;
+    --taupe:#D6C6FF;
+    --mint:#C8F2E6;
+    --green:#2EC4B6;
+    --marigold:#FFC145;
+    --brick:#FF6F91;
+    --line: rgba(46,42,38,0.12);
+    --card-shadow: 0 12px 24px -14px rgba(46,42,38,0.28), 0 2px 5px rgba(46,42,38,0.10);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background: var(--paper);
+    color:var(--ink);
+    font-family:'Manrope', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    margin:0;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  p{ margin:0; }
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+  button{ font-family:inherit; cursor:pointer; }
+
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position:sticky; top:0; z-index:30;
+    background:rgba(246,242,234,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px; max-width:1120px; margin:0 auto;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand-mark{
+    width:34px; height:34px; border-radius:50%;
+    background:var(--brick);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--paper); font-family:'Fraunces',serif; font-weight:700; font-size:17px;
+    transform:rotate(-6deg);
+  }
+  .brand-name{ font-family:'Fraunces', serif; font-size:19px; font-weight:600; }
+  .nav-links{ display:flex; gap:28px; font-size:14.5px; font-weight:500; }
+  .nav-links a{ text-decoration:none; border-bottom:2px solid transparent; padding-bottom:2px; transition:border-color .15s ease; }
+  .nav-links a:hover{ border-color:var(--marigold); }
+  .nav-cta{
+    background:var(--green); color:var(--paper); border:none;
+    padding:9px 20px; border-radius:999px; font-size:14px; font-weight:700;
+    text-decoration:none;
+  }
+  @media (max-width:760px){ .nav-links{ display:none; } }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding:72px 0 48px; position:relative; }
+  .hero-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center; }
+  @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
+  .hero-lamp{
+    background:var(--paper-dark); border-radius:20px;
+    padding:32px; display:flex; align-items:center; justify-content:center;
+    min-height:320px;
+  }
+  .hero-lamp svg{ width:100%; max-width:260px; height:auto; }
+
+  .eyebrow-note{
+    display:inline-block;
+    font-size:14px; color:var(--ink-soft);
+    background:var(--paper-dark);
+    border:1px dashed var(--line);
+    padding:6px 12px; border-radius:20px;
+    margin-bottom:20px;
+  }
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 60px);
+    line-height:1.04;
+    max-width:12ch;
+  }
+  .hero h1 .accent{ color:var(--brick); font-style:italic; font-weight:500; }
+  .hero-sub{
+    margin-top:20px; font-size:18px; color:var(--ink-soft); max-width:44ch;
+  }
+  .hero-actions{ margin-top:30px; display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 24px; border-radius:999px; font-weight:700; font-size:15px;
+    text-decoration:none; border:1px solid transparent;
+  }
+  .btn-primary{ background:var(--brick); color:var(--paper); }
+  .btn-primary:hover{ background:#9c3c26; }
+  .btn-ghost{ border-color:var(--ink); color:var(--ink); }
+  .btn-ghost:hover{ background:var(--ink); color:var(--paper); }
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{ padding:64px 0; }
+  .section-head{ max-width:640px; margin-bottom:36px; }
+  .section-head h2{ font-size:clamp(28px,3.6vw,38px); }
+  .section-head p{ margin-top:12px; font-size:16.5px; color:var(--ink-soft); }
+
+  /* ---------- CATEGORY CHIPS ---------- */
+  .chips{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:34px; }
+  .chip{
+    border:1px solid var(--ink); background:transparent;
+    padding:9px 16px; border-radius:20px; font-size:14px; font-weight:600;
+    transition:all .15s ease;
+  }
+  .chip.active, .chip:hover{ background:var(--green); color:var(--paper); border-color:var(--green); }
+
+  /* ---------- BUSINESS GRID ---------- */
+  .biz-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; }
+  @media (max-width:860px){ .biz-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .biz-grid{ grid-template-columns:1fr; } }
+
+  .biz-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:16px;
+    overflow:hidden; box-shadow:var(--card-shadow); transition:transform .18s ease;
+  }
+  .biz-card:hover{ transform:translateY(-3px); }
+  .biz-photo{
+    height:132px; display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-size:15px; color:rgba(255,255,255,0.92);
+    letter-spacing:0.01em;
+  }
+  .biz-body{ padding:16px 18px 18px; }
+  .biz-cat{ font-size:12.5px; color:var(--brick); font-weight:700; margin-bottom:6px; display:block; }
+  .biz-body h3{ font-size:18px; margin-bottom:6px; }
+  .biz-body p{ font-size:14px; color:var(--ink-soft); }
+  .biz-foot{ display:flex; justify-content:space-between; align-items:center; margin-top:14px; }
+  .biz-link{ font-size:13.5px; font-weight:700; text-decoration:none; border-bottom:2px solid var(--marigold); }
+  .badge{
+    font-size:11.5px; font-weight:700; padding:4px 11px; border-radius:999px;
+    background:var(--mint); color:var(--ink);
+  }
+  .badge.sale{ background:var(--brick); color:var(--paper); }
+
+  /* ---------- FEED ---------- */
+  .feed{ background:var(--paper-dark); }
+  .feed-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media (max-width:900px){ .feed-grid{ grid-template-columns:1fr; } }
+  .post{
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:16px; padding:20px; box-shadow:var(--card-shadow);
+  }
+  .post-kind{
+    font-size:12px; font-weight:700; color:var(--paper);
+    padding:4px 12px; border-radius:999px; display:inline-block; margin-bottom:12px;
+  }
+  .post-kind.spotlight{ background:var(--green); }
+  .post-kind.pick{ background:var(--marigold); color:var(--ink); }
+  .post-kind.sale{ background:var(--brick); }
+  .post h4{ font-size:17px; margin-bottom:8px; }
+  .post p{ font-size:14.5px; color:var(--ink-soft); }
+  .post-meta{ margin-top:14px; font-size:13px; color:var(--ink-soft); display:flex; justify-content:space-between; }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  @media (max-width:860px){ .steps{ grid-template-columns:1fr; } }
+  .step{ padding:24px; border:1px solid var(--line); border-radius:16px; background:var(--paper); }
+  .step h4{ font-size:17px; margin-bottom:8px; }
+  .step p{ font-size:14.5px; color:var(--ink-soft); }
+  .step-mark{
+    width:36px; height:36px; border-radius:50%; background:var(--paper-dark);
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+    font-family:'Fraunces',serif; font-weight:600; color:var(--brick);
+  }
+
+  /* ---------- SUBMIT / GET FEATURED ---------- */
+  .featured{
+    background:var(--green); color:var(--paper); border-radius:26px;
+    padding:52px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:44px;
+    align-items:center;
+  }
+  @media (max-width:860px){ .featured{ grid-template-columns:1fr; padding:36px 24px; } }
+  .featured h2{ color:var(--paper); font-size:clamp(26px,3.2vw,34px); }
+  .featured p{ color:rgba(246,242,234,0.82); margin-top:14px; font-size:15.5px; }
+  .featured-list{ list-style:none; margin:22px 0 0; padding:0; display:flex; flex-direction:column; gap:12px; }
+  .featured-list li{ display:flex; gap:10px; font-size:14.5px; color:rgba(246,242,234,0.9); }
+  .dot{ width:6px; height:6px; border-radius:50%; background:var(--marigold); margin-top:8px; flex-shrink:0; }
+
+  .form-card{
+    background:var(--paper); color:var(--ink); border-radius:20px; padding:26px;
+  }
+  .form-card h3{ font-size:19px; margin-bottom:6px; }
+  .form-card p.small{ font-size:13.5px; color:var(--ink-soft); margin-bottom:18px; }
+  .form-row{ margin-bottom:14px; }
+  .form-row label{ display:block; font-size:13px; font-weight:700; margin-bottom:6px; }
+  .form-row input, .form-row select, .form-row textarea{
+    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px;
+    font-family:inherit; font-size:14px; background:var(--paper);
+  }
+  .form-row textarea{ resize:vertical; min-height:70px; }
+  .form-submit{
+    width:100%; background:var(--coral-deep); color:var(--paper); border:none;
+    padding:13px; border-radius:999px; font-weight:700; font-size:15px; margin-top:4px;
+  }
+  .form-submit:hover{ background:#a8664f; }
+  .form-card p.form-note{ font-size:13px; color:var(--ink); font-weight:500; margin-top:16px; text-align:center; }
+  .feature-quote{
+    font-family:'Fraunces',serif; font-style:italic; font-size:15px;
+    color:rgba(246,242,234,0.85); text-align:center; margin-top:20px; padding:0 12px;
+  }
+  .feature-quote span{ display:block; font-style:normal; font-size:13px; margin-top:6px; opacity:0.75; }
+  .toast{
+    margin-top:14px; font-size:13.5px; background:var(--paper-dark);
+    border:1px solid var(--line); border-radius:4px; padding:10px 12px; display:none;
+  }
+  .toast.show{ display:block; }
+
+  #formEmbedSlot iframe{
+    width:100%; min-height:520px; border:1px solid var(--line); border-radius:16px;
+  }
+  .form-placeholder{
+    border:2px dashed var(--coral); border-radius:16px;
+    background:var(--paper-dark);
+    padding:26px 20px; text-align:center;
+  }
+  .form-placeholder p{ font-size:14.5px; }
+  .form-placeholder .placeholder-sub{ margin-top:8px; font-size:13px; color:var(--ink-soft); }
+  .form-linkout{
+    text-align:center; margin:28px 0;
+  }
+  .form-linkout p{ font-size:14px; color:var(--ink-soft); margin-bottom:16px; }
+  .form-linkout .btn{ display:inline-flex; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ border-top:1px solid var(--line); padding:36px 0; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+  .foot-links{ display:flex; gap:20px; font-size:14px; font-weight:600; }
+  .foot-links a{ text-decoration:none; }
+  .foot-note{ font-size:13px; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav>
+    <div class="brand">
+      <div class="brand-mark">S</div>
+      <div class="brand-name">Small Spotlight</div>
+    </div>
+    <div class="nav-links">
+      <a href="#directory">Directory</a>
+      <a href="#feed">Spotlights &amp; deals</a>
+      <a href="#how">How it works</a>
+      <a href="#get-featured">Get featured</a>
+    </div>
+    <a class="nav-cta" href="#get-featured">Get featured</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow-note">a free corner of the internet for small business</span>
+      <h1>Find the maker down<br>the street, <span class="accent">not the algorithm.</span></h1>
+      <p class="hero-sub">Small Spotlight collects small businesses by what they make — kitchen, home, decor, stationery, clothing, and more — and gives each one a real shot at being seen. Browsing is free. Listing is free. That's the whole idea.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#directory">Browse the directory</a>
+        <a class="btn btn-ghost" href="#get-featured">List your business</a>
+      </div>
+    </div>
+    <div class="hero-lamp">
+      <svg viewBox="0 0 300 300" role="img" aria-labelledby="lampTitle">
+        <title id="lampTitle">A small pendant lamp casting a warm spotlight</title>
+        <defs>
+          <linearGradient id="lampBeam" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#D98F5F" stop-opacity="0.5"/>
+            <stop offset="1" stop-color="#D98F5F" stop-opacity="0.05"/>
+          </linearGradient>
+        </defs>
+        <circle cx="150" cy="30" r="8" fill="#6B5C4D"/>
+        <line x1="150" y1="38" x2="150" y2="108" stroke="#6B5C4D" stroke-width="4"/>
+        <path d="M128 108 L172 108 L212 158 L88 158 Z" fill="#D98F5F"/>
+        <circle cx="150" cy="171" r="15" fill="#F2C185"/>
+        <path d="M150 183 L72 260 L228 260 Z" fill="url(#lampBeam)"/>
+        <ellipse cx="150" cy="264" rx="88" ry="15" fill="#D98F5F" fill-opacity="0.18"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="directory">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The directory</h2>
+      <p>Every business here was added by hand — no ranking, no pay-to-rank, just a shelf organized by what you're actually looking for.</p>
+    </div>
+
+    <div class="chips" id="chipRow">
+      <button class="chip active" data-cat="all">All</button>
+      <button class="chip" data-cat="kitchen">Kitchen</button>
+      <button class="chip" data-cat="room">Room &amp; Home</button>
+      <button class="chip" data-cat="decor">Decor</button>
+      <button class="chip" data-cat="stationery">Stationery</button>
+      <button class="chip" data-cat="clothes">Clothes</button>
+      <button class="chip" data-cat="etc">Everything else</button>
+    </div>
+
+    <div class="biz-grid" id="bizGrid"></div>
+  </div>
+</section>
+
+<section class="feed" id="feed">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Spotlights, picks &amp; deals</h2>
+      <p>Short posts on the businesses we've featured — a spotlight write-up, a product we'd actually buy, or a sale worth knowing about.</p>
+    </div>
+    <div class="feed-grid" id="feedGrid"></div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How the free promotion works</h2>
+      <p>Three ways we help a business get in front of more people — pick whichever fits.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-mark">1</div>
+        <h4>Get listed</h4>
+        <p>Fill out the form below with your business, category, and a photo or two. We add you to the directory and post a short spotlight introducing you.</p>
+      </div>
+      <div class="step">
+        <div class="step-mark">2</div>
+        <h4>Tell us about a sale</h4>
+        <p>Running a promotion? Send the details and we'll post it to the deals feed and our Instagram so people can catch it while it's live.</p>
+      </div>
+      <div class="step">
+        <div class="step-mark">3</div>
+        <h4>Send a product, get a review</h4>
+        <p>Mail us something you make and we'll film an honest review for TikTok and Instagram — real reactions, tagged back to your shop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="get-featured">
+  <div class="wrap">
+    <div class="featured">
+      <div>
+        <h2>List your business — it's free.</h2>
+        <p>Small Spotlight doesn't take a cut, run ads against your shop, or charge for placement. We just want more people to find good small businesses.</p>
+        <ul class="featured-list">
+          <li><span class="dot"></span> Added to the category directory, searchable by what you make</li>
+          <li><span class="dot"></span> A spotlight post written about your shop, shared on Instagram</li>
+          <li><span class="dot"></span> Sales and promotions posted to the deals feed as they happen</li>
+          <li><span class="dot"></span> Optional product review filmed for TikTok &amp; Instagram if you send us something</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="form-card">
+          <h3>Request a feature</h3>
+
+          <div id="formEmbedSlot">
+            <div class="form-linkout">
+              <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSc50kwIpiKWxd-onhRj3hJMxffhIB68c3XingDDQLWPZygpug/viewform" target="_blank" rel="noopener">Open the feature request form</a>
+            </div>
+          </div>
+
+          <p class="form-note">Free forever for small businesses. No fees, no catch.</p>
+        </div>
+        <p class="feature-quote">"listing took ten minutes, and our first sale from it came within a week." <span>— a featured maker</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="brand">
+      <div class="brand-mark">S</div>
+      <div class="brand-name">Small Spotlight</div>
+    </div>
+    <div class="foot-links">
+      <a href="#directory">Directory</a>
+      <a href="#feed">Feed</a>
+      <a href="#get-featured">Get featured</a>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+    </div>
+    <div class="foot-note">A free directory for small businesses · demo build</div>
+  </div>
+</footer>
+
+<script>
+  const businesses = [
+    {name:"Copper & Clove", cat:"kitchen", label:"Kitchen", desc:"Small-batch stoneware mugs and bowls, thrown and glazed by hand.", color:"#2EC4B6", sale:false},
+    {name:"Grandma's Pantry Co.", cat:"kitchen", label:"Kitchen", desc:"Spice blends and pantry staples made from a three-generation recipe box.", color:"#FFB454", sale:true},
+    {name:"Linen & Light", cat:"room", label:"Room & Home", desc:"Stonewashed linen bedding and throws, dyed with plant-based color.", color:"#6FC6E8", sale:false},
+    {name:"Warm Hollow Candles", cat:"room", label:"Room & Home", desc:"Soy candles poured in small batches, named after actual hiking trails.", color:"#FF9F6B", sale:false},
+    {name:"Paper Moon Prints", cat:"decor", label:"Decor", desc:"Risograph art prints of night skies and quiet rooms.", color:"#B18AFF", sale:false},
+    {name:"Knot & Bramble", cat:"decor", label:"Decor", desc:"Macrame wall hangings and plant slings, made to order.", color:"#FF6F91", sale:true},
+    {name:"Inkwell & Fern", cat:"stationery", label:"Stationery", desc:"Letterpress cards and hand-bound notebooks with botanical covers.", color:"#FFC145", sale:false},
+    {name:"Loose Leaf Studio", cat:"stationery", label:"Stationery", desc:"Watercolor stickers and planner inserts, hand-painted in small runs.", color:"#7FE0C9", sale:false},
+    {name:"Mended Thread", cat:"clothes", label:"Clothes", desc:"Slow-made basics with visible mending built into the design.", color:"#FF8FB1", sale:false},
+    {name:"Sunday Market Co.", cat:"clothes", label:"Clothes", desc:"Upcycled denim and market totes, one seam at a time.", color:"#6FC3E0", sale:true},
+    {name:"Bramblewick Botanicals", cat:"etc", label:"Bath & Body", desc:"Cold-processed soap and salves, small-batch and unscented options too.", color:"#9BE0A8", sale:false},
+    {name:"Tinker & Bloom", cat:"etc", label:"Kids & Toys", desc:"Wooden toys and puzzles, finished with food-safe oil.", color:"#FFA6C9", sale:false},
+  ];
+
+  const feed = [
+    {kind:"spotlight", label:"Spotlight", title:"Meet Copper & Clove", body:"A one-person ceramics studio that started on a kitchen table three years ago — now shipping mugs to a waitlist.", meta:"Kitchen · this week"},
+    {kind:"pick", label:"Product pick", title:"The linen throw we keep recommending", body:"Linen & Light's stonewashed throw softens with every wash. We've bought three as gifts.", meta:"Room & Home"},
+    {kind:"sale", label:"Sale alert", title:"20% off at Sunday Market Co.", body:"Their upcycled denim totes are on sale through the weekend — worth grabbing before the restock.", meta:"Clothes · ends Sunday"},
+    {kind:"spotlight", label:"Spotlight", title:"Meet Inkwell & Fern", body:"A letterpress studio run out of a converted garage, printing every card on a hand-fed press.", meta:"Stationery · this week"},
+    {kind:"pick", label:"Product pick", title:"A candle that actually smells like the trail", body:"Warm Hollow's 'Switchback' candle is the closest thing to bottled pine we've found.", meta:"Room & Home"},
+    {kind:"sale", label:"Sale alert", title:"Knot & Bramble's end-of-season sale", body:"Wall hangings and plant slings marked down while they restock cotton cord.", meta:"Decor · limited stock"},
+  ];
+
+  const bizGrid = document.getElementById('bizGrid');
+  function renderBiz(filter){
+    bizGrid.innerHTML = '';
+    businesses
+      .filter(b => filter === 'all' || b.cat === filter)
+      .forEach(b => {
+        const card = document.createElement('div');
+        card.className = 'biz-card';
+        card.innerHTML = `
+          <div class="biz-photo" style="background:${b.color}">${b.name}</div>
+          <div class="biz-body">
+            <span class="biz-cat">${b.label}</span>
+            <h3>${b.name}</h3>
+            <p>${b.desc}</p>
+            <div class="biz-foot">
+              <a class="biz-link" href="#">View profile</a>
+              ${b.sale ? '<span class="badge sale">On sale</span>' : '<span class="badge">Handmade</span>'}
+            </div>
+          </div>`;
+        bizGrid.appendChild(card);
+      });
+  }
+  renderBiz('all');
+
+  document.getElementById('chipRow').addEventListener('click', (e) => {
+    if(!e.target.classList.contains('chip')) return;
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    e.target.classList.add('active');
+    renderBiz(e.target.dataset.cat);
+  });
+
+  const feedGrid = document.getElementById('feedGrid');
+  feed.forEach(f => {
+    const post = document.createElement('div');
+    post.className = 'post';
+    post.innerHTML = `
+      <span class="post-kind ${f.kind}">${f.label}</span>
+      <h4>${f.title}</h4>
+      <p>${f.body}</p>
+      <div class="post-meta"><span>${f.meta}</span></div>`;
+    feedGrid.appendChild(post);
+  });
+
+</script>
+
+</body>
+</html>
